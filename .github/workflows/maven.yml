@@ -1,6 +1,4 @@
-
-
-name: API Testing
+name: API Testing with Allure
 
 on:
   push:
@@ -9,17 +7,70 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
     steps:
+    # Checkout code
     - uses: actions/checkout@v4
+    
+    # Set up JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: execute test
-      run: mvn clean test
+    
+    # Run tests with Allure support
+    - name: Execute tests with Allure
+      run: mvn clean test -Dallure.results.directory=target/allure-results
+    
+    # Generate Allure report
+    - name: Generate Allure report
+      run: |
+        mvn allure:report -Dallure.results.directory=target/allure-results
+    
+    # Archive Allure report artifacts
+    - name: Archive Allure report
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-report
+        path: target/site/allure-maven-plugin/
+        retention-days: 7
+    
+    # Upload Allure results for history (optional)
+    - name: Upload Allure results
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results
+        path: target/allure-results/
+        retention-days: 7
+
+  allure-report:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: always() # Run even if tests fail
+    
+    steps:
+    # Download Allure results
+    - name: Download Allure results
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results
+        path: target/allure-results
+    
+    # Generate and publish Allure report
+    - name: Generate Allure report
+      run: |
+        npm install -g allure-commandline
+        allure generate target/allure-results -o target/allure-report --clean
+    
+    # Deploy to GitHub Pages (optional)
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: target/allure-report
