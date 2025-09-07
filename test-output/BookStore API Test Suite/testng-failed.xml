@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [BookStore API Test Suite]">
+  <listeners>
+    <listener class-name="com.bookapi.report.ExtentFactory"/>
+  </listeners>
+  <test thread-count="5" name="BookStore API Tests(failed)">
+    <classes>
+      <class name="com.bookapi.testcases.LoginForAccessTokenTest">
+        <methods>
+          <include name="loginUsingIncorrectCred"/>
+          <include name="loginUsingnewlyCreatedUser"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.LoginForAccessTokenTest -->
+      <class name="com.bookapi.testcases.GetBookByIdTest">
+        <methods>
+          <include name="validatingIfUserAbleToSearchIncorrectBookByID"/>
+          <include name="validatingIfUserAbleToSearchBookByID"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.GetBookByIdTest -->
+      <class name="com.bookapi.testcases.CreateUserSignupTest">
+        <methods>
+          <include name="createNewUser"/>
+          <include name="createExistingUser"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.CreateUserSignupTest -->
+      <class name="com.bookapi.testcases.HealthCheckTest">
+        <methods>
+          <include name="validatingServiceHealth"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.HealthCheckTest -->
+      <class name="com.bookapi.testcases.UpdateBookTest">
+        <methods>
+          <include name="validatingIfUserAbleToSearchUpdatedBookByID"/>
+          <include name="validateUserAbleToUpdateNewlyAddedBook"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.UpdateBookTest -->
+      <class name="com.bookapi.testcases.DeleteBookTest">
+        <methods>
+          <include name="validatingIfUserAbleToDeleteBookByIDAgain"/>
+          <include name="validatingIfUserAbleToDeleteBookByID"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.DeleteBookTest -->
+      <class name="com.bookapi.testcases.GetAllBooksTest">
+        <methods>
+          <include name="NoBooksDisplayedForInvalidToken"/>
+          <include name="validatingBooksAreDisplayed"/>
+          <include name="NoBooksDisplayedForNoToken"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.GetAllBooksTest -->
+      <class name="com.bookapi.testcases.IncorrectJsonFormat">
+        <methods>
+          <include name="incorrectJSON"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.IncorrectJsonFormat -->
+      <class name="com.bookapi.testcases.CreateBookTest">
+        <methods>
+          <include name="validatingNewBookIsDisplayedInList"/>
+          <include name="validatingUserAbleToCreateNewBook"/>
+        </methods>
+      </class> <!-- com.bookapi.testcases.CreateBookTest -->
+    </classes>
+  </test> <!-- BookStore API Tests(failed) -->
+</suite> <!-- Failed suite [BookStore API Test Suite] -->

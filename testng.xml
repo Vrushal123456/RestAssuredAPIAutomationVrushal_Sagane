@@ -1,0 +1,20 @@
+<suite name="BookStore API Test Suite">
+
+	<listeners>
+		<listener class-name="com.bookapi.report.AllureFactory" />
+	</listeners>
+	<test name="BookStore API Tests">
+		<classes>
+			<class name="com.bookapi.testcases.HealthCheckTest" />
+			<class name="com.bookapi.testcases.CreateUserSignupTest" />
+			<class name="com.bookapi.testcases.LoginForAccessTokenTest" />
+			<class name="com.bookapi.testcases.GetAllBooksTest" />
+			<class name="com.bookapi.testcases.CreateBookTest" />
+			<class name="com.bookapi.testcases.GetBookByIdTest" />
+			<class name="com.bookapi.testcases.UpdateBookTest" />
+			<class name="com.bookapi.testcases.DeleteBookTest" />
+			<class name="com.bookapi.testcases.IncorrectJsonFormat" />
+			<class name="com.bookapi.testcases.TokenTest" />
+		</classes>
+	</test>
+</suite>

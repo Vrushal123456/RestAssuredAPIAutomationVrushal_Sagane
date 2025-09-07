@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="22" passed="22" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-08-18T19:33:57 IST" name="BookStore API Test Suite" finished-at="2025-08-18T19:34:02 IST" duration-ms="4961">
+    <groups>
+      <group name="userCreation">
+        <method signature="CreateUserSignupTest.createNewUser()[pri:2, instance:com.bookapi.testcases.CreateUserSignupTest@6e9175d8]" name="createNewUser" class="com.bookapi.testcases.CreateUserSignupTest"/>
+      </group> <!-- userCreation -->
+    </groups>
+    <test started-at="2025-08-18T19:33:57 IST" name="BookStore API Tests" finished-at="2025-08-18T19:34:02 IST" duration-ms="4961">
+      <class name="com.bookapi.testcases.IncorrectJsonFormat">
+        <test-method signature="incorrectJSON()[pri:15, instance:com.bookapi.testcases.IncorrectJsonFormat@2cf3d63b]" started-at="2025-08-18T19:34:02 IST" name="incorrectJSON" description="Incorrectly formatted JSON file validation" finished-at="2025-08-18T19:34:02 IST" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- incorrectJSON -->
+      </class> <!-- com.bookapi.testcases.IncorrectJsonFormat -->
+      <class name="com.bookapi.testcases.CreateBookTest">
+        <test-method signature="validatingUserAbleToCreateNewBook()[pri:9, instance:com.bookapi.testcases.CreateBookTest@4b741d6d]" started-at="2025-08-18T19:34:01 IST" name="validatingUserAbleToCreateNewBook" description="Validating if user able to create a book" finished-at="2025-08-18T19:34:02 IST" duration-ms="306" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingUserAbleToCreateNewBook -->
+        <test-method signature="validatingNewBookIsDisplayedInList()[pri:10, instance:com.bookapi.testcases.CreateBookTest@4b741d6d]" started-at="2025-08-18T19:34:02 IST" name="validatingNewBookIsDisplayedInList" description="Validating if newly created book is displayed in the list of all the books" finished-at="2025-08-18T19:34:02 IST" depends-on-methods="com.bookapi.testcases.CreateBookTest.validatingUserAbleToCreateNewBook" duration-ms="57" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingNewBookIsDisplayedInList -->
+      </class> <!-- com.bookapi.testcases.CreateBookTest -->
+      <class name="com.bookapi.testcases.UpdateBookTest">
+        <test-method signature="validateUserAbleToUpdateNewlyAddedBook()[pri:12, instance:com.bookapi.testcases.UpdateBookTest@8f2ef19]" started-at="2025-08-18T19:34:02 IST" name="validateUserAbleToUpdateNewlyAddedBook" description="Updating newly added book" finished-at="2025-08-18T19:34:02 IST" duration-ms="120" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateUserAbleToUpdateNewlyAddedBook -->
+        <test-method signature="validatingIfUserAbleToSearchUpdatedBookByID()[pri:13, instance:com.bookapi.testcases.UpdateBookTest@8f2ef19]" started-at="2025-08-18T19:34:02 IST" name="validatingIfUserAbleToSearchUpdatedBookByID" description="Validating newly created book can be searched using ID" finished-at="2025-08-18T19:34:02 IST" depends-on-methods="com.bookapi.testcases.UpdateBookTest.validateUserAbleToUpdateNewlyAddedBook" duration-ms="44" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingIfUserAbleToSearchUpdatedBookByID -->
+      </class> <!-- com.bookapi.testcases.UpdateBookTest -->
+      <class name="com.bookapi.testcases.LoginForAccessTokenTest">
+        <test-method signature="loginUsingnewlyCreatedUser()[pri:4, instance:com.bookapi.testcases.LoginForAccessTokenTest@7d0b7e3c]" started-at="2025-08-18T19:34:00 IST" name="loginUsingnewlyCreatedUser" description="Login using newly created user" depends-on-groups="userCreation" finished-at="2025-08-18T19:34:00 IST" duration-ms="277" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginUsingnewlyCreatedUser -->
+        <test-method signature="loginUsingIncorrectCred(java.lang.String,java.lang.String)[pri:5, instance:com.bookapi.testcases.LoginForAccessTokenTest@7d0b7e3c]" started-at="2025-08-18T19:34:00 IST" name="loginUsingIncorrectCred" description="NEGATIVE: Login using incorrect credentails" data-provider="setOfInvalidCreds" finished-at="2025-08-18T19:34:01 IST" duration-ms="266" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[user6644@example.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Incorrectpwd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginUsingIncorrectCred -->
+        <test-method signature="loginUsingIncorrectCred(java.lang.String,java.lang.String)[pri:5, instance:com.bookapi.testcases.LoginForAccessTokenTest@7d0b7e3c]" started-at="2025-08-18T19:34:01 IST" name="loginUsingIncorrectCred" description="NEGATIVE: Login using incorrect credentails" data-provider="setOfInvalidCreds" finished-at="2025-08-18T19:34:01 IST" duration-ms="23" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[IncorrectUser]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[pwd8143]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginUsingIncorrectCred -->
+        <test-method signature="loginUsingIncorrectCred(java.lang.String,java.lang.String)[pri:5, instance:com.bookapi.testcases.LoginForAccessTokenTest@7d0b7e3c]" started-at="2025-08-18T19:34:01 IST" name="loginUsingIncorrectCred" description="NEGATIVE: Login using incorrect credentails" data-provider="setOfInvalidCreds" finished-at="2025-08-18T19:34:01 IST" duration-ms="269" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[user6644@example.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginUsingIncorrectCred -->
+        <test-method signature="loginUsingIncorrectCred(java.lang.String,java.lang.String)[pri:5, instance:com.bookapi.testcases.LoginForAccessTokenTest@7d0b7e3c]" started-at="2025-08-18T19:34:01 IST" name="loginUsingIncorrectCred" description="NEGATIVE: Login using incorrect credentails" data-provider="setOfInvalidCreds" finished-at="2025-08-18T19:34:01 IST" duration-ms="272" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[pwd8143]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginUsingIncorrectCred -->
+      </class> <!-- com.bookapi.testcases.LoginForAccessTokenTest -->
+      <class name="com.bookapi.testcases.HealthCheckTest">
+        <test-method signature="validatingServiceHealth()[pri:1, instance:com.bookapi.testcases.HealthCheckTest@f0c8a99]" started-at="2025-08-18T19:33:57 IST" name="validatingServiceHealth" description="PreRequiste- Validating if Server is up and running." finished-at="2025-08-18T19:34:00 IST" duration-ms="2130" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingServiceHealth -->
+      </class> <!-- com.bookapi.testcases.HealthCheckTest -->
+      <class name="com.bookapi.testcases.GetBookByIdTest">
+        <test-method signature="validatingIfUserAbleToSearchBookByID()[pri:11, instance:com.bookapi.testcases.GetBookByIdTest@2eae8e6e]" started-at="2025-08-18T19:34:02 IST" name="validatingIfUserAbleToSearchBookByID" description="Validating newly created book can be searched using ID" finished-at="2025-08-18T19:34:02 IST" duration-ms="38" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingIfUserAbleToSearchBookByID -->
+        <test-method signature="validatingIfUserAbleToSearchIncorrectBookByID()[pri:11, instance:com.bookapi.testcases.GetBookByIdTest@2eae8e6e]" started-at="2025-08-18T19:34:02 IST" name="validatingIfUserAbleToSearchIncorrectBookByID" description="NEGATIVE: Validating user unable to search a book with incorrect ID" finished-at="2025-08-18T19:34:02 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingIfUserAbleToSearchIncorrectBookByID -->
+      </class> <!-- com.bookapi.testcases.GetBookByIdTest -->
+      <class name="com.bookapi.testcases.CreateUserSignupTest">
+        <test-method signature="createNewUser()[pri:2, instance:com.bookapi.testcases.CreateUserSignupTest@6e9175d8]" started-at="2025-08-18T19:34:00 IST" name="createNewUser" description="Validating creation of new user" finished-at="2025-08-18T19:34:00 IST" duration-ms="489" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewUser -->
+        <test-method signature="createExistingUser()[pri:3, instance:com.bookapi.testcases.CreateUserSignupTest@6e9175d8]" started-at="2025-08-18T19:34:00 IST" name="createExistingUser" description="NEGATIVE: Validating creation of new user with existing email and id" finished-at="2025-08-18T19:34:00 IST" depends-on-methods="com.bookapi.testcases.CreateUserSignupTest.createNewUser" duration-ms="36" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createExistingUser -->
+      </class> <!-- com.bookapi.testcases.CreateUserSignupTest -->
+      <class name="com.bookapi.testcases.TokenTest">
+        <test-method signature="NoBooksDisplayedForExpiredToken()[pri:16, instance:com.bookapi.testcases.TokenTest@7674f035]" started-at="2025-08-18T19:34:02 IST" name="NoBooksDisplayedForExpiredToken" description="NEGATIVE: Validating if books are not displayed when EXPIRED token used" finished-at="2025-08-18T19:34:02 IST" duration-ms="32" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- NoBooksDisplayedForExpiredToken -->
+        <test-method signature="NoBooksDisplayedForInvalidToken()[pri:17, instance:com.bookapi.testcases.TokenTest@7674f035]" started-at="2025-08-18T19:34:02 IST" name="NoBooksDisplayedForInvalidToken" description="NEGATIVE: Validating if books are not displayed when INVALID token used" finished-at="2025-08-18T19:34:02 IST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- NoBooksDisplayedForInvalidToken -->
+      </class> <!-- com.bookapi.testcases.TokenTest -->
+      <class name="com.bookapi.testcases.GetAllBooksTest">
+        <test-method signature="validatingBooksAreDisplayed()[pri:6, instance:com.bookapi.testcases.GetAllBooksTest@15bb5034]" started-at="2025-08-18T19:34:01 IST" name="validatingBooksAreDisplayed" description="Validating if books are displayed" finished-at="2025-08-18T19:34:01 IST" duration-ms="36" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingBooksAreDisplayed -->
+        <test-method signature="NoBooksDisplayedForInvalidToken()[pri:7, instance:com.bookapi.testcases.GetAllBooksTest@15bb5034]" started-at="2025-08-18T19:34:01 IST" name="NoBooksDisplayedForInvalidToken" description="NEGATIVE: Validating if books are not displayed when invalid token used" finished-at="2025-08-18T19:34:01 IST" duration-ms="22" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- NoBooksDisplayedForInvalidToken -->
+        <test-method signature="NoBooksDisplayedForNoToken()[pri:8, instance:com.bookapi.testcases.GetAllBooksTest@15bb5034]" started-at="2025-08-18T19:34:01 IST" name="NoBooksDisplayedForNoToken" description="NEGATIVE: Validating if books are displayed when no token used" finished-at="2025-08-18T19:34:01 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- NoBooksDisplayedForNoToken -->
+      </class> <!-- com.bookapi.testcases.GetAllBooksTest -->
+      <class name="com.bookapi.testcases.DeleteBookTest">
+        <test-method signature="validatingIfUserAbleToDeleteBookByID()[pri:14, instance:com.bookapi.testcases.DeleteBookTest@470734c3]" started-at="2025-08-18T19:34:02 IST" name="validatingIfUserAbleToDeleteBookByID" description="Delating newly created book can be searched using ID" finished-at="2025-08-18T19:34:02 IST" duration-ms="68" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingIfUserAbleToDeleteBookByID -->
+        <test-method signature="validatingIfUserAbleToDeleteBookByIDAgain()[pri:14, instance:com.bookapi.testcases.DeleteBookTest@470734c3]" started-at="2025-08-18T19:34:02 IST" name="validatingIfUserAbleToDeleteBookByIDAgain" description="NEGATIVE: againDelating newly created book can be searched using ID" finished-at="2025-08-18T19:34:02 IST" depends-on-methods="com.bookapi.testcases.DeleteBookTest.validatingIfUserAbleToDeleteBookByID" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatingIfUserAbleToDeleteBookByIDAgain -->
+      </class> <!-- com.bookapi.testcases.DeleteBookTest -->
+    </test> <!-- BookStore API Tests -->
+  </suite> <!-- BookStore API Test Suite -->
+</testng-results>
