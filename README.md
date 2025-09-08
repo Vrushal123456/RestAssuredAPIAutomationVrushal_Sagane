@@ -21,7 +21,7 @@ Steps to Run Tests
 
 Clone the repository:
 
-git clone https://github.com/your-username/bookapi-tests.git
+git clone https://github.com/Vrushal123456/bookapi-tests.git
 cd RestAssuredVrushal
 
 
