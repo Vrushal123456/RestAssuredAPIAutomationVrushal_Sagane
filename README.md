@@ -1,173 +1,214 @@
-RestAssured Framework for testing Book API (By Shiv Sahil Guleri)
+Author: Vrushal Sagane
 
-## How to Run the Tests
+This repository contains an automated test framework built with RestAssured + TestNG for validating the Book Store API. The framework focuses on reusability, maintainability, detailed reporting, and CI/CD integration.
 
-### Prerequisites
+🔧 Setup & Execution
+Prerequisites
 
-- Maven 3.8.4+
-- Java 17+
-- Git
-- Any IDE (e.g., IntelliJ IDEA, Eclipse, VS Code)
-- Run Book Store API on local machine after reading the Book API's own README.md file
+Before running the tests, ensure the following are installed:
 
-### Steps to Execute
+Java 17+
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/bookapi-tests.git
-   cd RestAssuredShiv
-2. set env as QA in config file using, env=QA
-3. Run the Scenarios
-   ```bash
-   mvn clean test
-4.  Reports are generated with a time stamped named for easy identification
-   cd RestAssuredShiv/report
+Maven 3.8.4+
 
-## Sample Report
-**[Download Sample Report](readMeScreenshot/sampleReport.html)**
+Git
 
-## Validation Covered
-Validation is handled through the *WrappedAssert* class, which extends TestNG’s built-in assertions with Log4j and ExtentReports integration.
+Any IDE (IntelliJ IDEA, Eclipse, VS Code)
 
-1. Header and body validations are covered within the test cases.
-2. Schema validation is built into the *ApiClient* class.
-3. Status code validation is also built into the *ApiClient* class.
-4. Negative test cases are included as well.
+Running instance of Book Store API (refer to API’s README.md)
+
+Steps to Run Tests
+
+Clone the repository:
+
+git clone https://github.com/your-username/bookapi-tests.git
+cd RestAssuredVrushal
 
 
-## Project Structure Implementation Details
+Set environment in the config file (config.properties):
 
-- Each API request is mapped to a corresponding **test class** with the same name.  
-  Example: *Get All Books* request is tested in **`GetAllBooksTest.java`**.
-
-- A single test class can contain **multiple test cases**.
-
-- **POJO classes** are used for serialization and deserialization of request and response bodies.
-
-#### Request Chaining
-- The token generated from a **login request** is reused across subsequent requests.  
-- Newly created **username and password** are also reused in other requests.  
-- **`dependsOnGroups`** and **`dependsOnMethods`** annotations ensure proper test execution order.
-
-#### Logging
-- Test cases use **`WrappedReportLogger`** for logging.  
-- Logs are displayed on the **console** and also captured in the **Extent Report**.
-
-#### ApiClient
-- Handles sending HTTP requests: `GET`, `POST`, `PUT`, `DELETE`.  
-- Validates responses against:
-  - **Status codes**  
-  - **JSON schemas**  
-- Internally uses **`WrappedAssert`** for assertions.
-
-#### RequestBuilder
-- Provides reusable request specifications.  
-- Supports different combinations such as:
-  - With Auth Token  
-  - With Body (without Auth Token)  
-- Accepts **path parameters** and **query parameters**.
-
-#### Data-Driven Testing
-- Implemented using **`@DataProvider`** to supply multiple input sets for test cases.
-
-#### Assertions
-- Standard assertions: `assertEquals`, `assertNotNull`, `assertTrue`.  
-- Schema validation (`assertJsonSchema`) and status code checks are built into **`ApiClient`**.
-
-#### Schema Management
-- JSON Schemas for expected responses are stored in a **dedicated folder** for better organization.
-
-#### EnvConfigResolver
-- The **`EnvConfigResolver`** class dynamically resolves environment-specific configurations:
-  - `URL`  
-  - `Email`  
-  - `Password`  
-- Supported environments: **QA**, **DEV**, **PROD**.
+env=QA
 
 
-## Testing Strategy 
-- request chaining was done for shairing token, new email, new pwd.
+Execute test scenarios:
 
-- `**POSTIVE WORKFLOW** health Check up>> creation of new user >> login to get access token >> get all books >> create new Book >> Validating of new book is displayed in the list of all the books >> getting newly created book by ID >> update newly added book >> check this newly added book in list of all the book >> Delete newly added book`
-
-- `**NEGATIVE TESTCASES** Validating creation of new user with existing email, Login using incorrect _SET OF_ credentails, Validating if books are not displayed when invalid token used, Validating if books are not displayed when NO token used, Validating user unable to search a book with incorrect ID, try to twice delete a book, unable to search deleted book, Incorrectly formatted JSON file validation, validating using expired and incorrect token`
-- POJO classes used for searlization and desearlization
-- in each testcases Logging was done. this outputed details on Console and report
-- Negative testcases are covered.
-- validation of Body, header, status code, schema is also covered.
-- @DataProvider is to supply multiple input sets for test cases.
--  environment-specific configurations like URL, email and password are resolved dynamically
--  yml file for **gitHub action** has already been added
-
-## List of issues
--  I am  unable to create *Invalid JSON Request Body** which could give us 422 status using POJO classs .
-  ![Report Screenshot](readMeScreenshot/422.png)
-   Instead of relying on serialization, I build the string manually.
-- When incorrect credentials are provided during login, the server responds with a 400 Bad Request instead of a 401 Unauthorized.
-- During the login request validation, I found that the request is processed regardless of the provided user ID.
-- If a user tries to retrieve all books with an incorrect token, they receive a 403 Forbidden error instead of a 401 Unauthorized.
-- When attempting to add a new book with an existing ID, the server returns a 500 Internal Server Error, indicating it cannot handle duplicate IDs.
-- There is currently no functionality to delete users, making test data cleanup impossible.
-- since API provided to me was on local machine. I hosted it on my local machine using "ssh -R 80:127.0.0.1:8000 serveo.net". after that I added the temporary URL to my config file.
-Whenever I am pushing my code to gitHub, execution is trigerring automtically on **github actions**. Although this is not correct CI pipeline. A correct CI pipeline, starts executing when someone checks in code to Dev repo and not to QA repo.
- ![Github actions](readMeScreenshot/githubActions.png)
+mvn clean test
 
 
-## FrameWork structure
-```
-src/main/java/
-└── com/bookapi/
-    ├── assertions/
-    │   └── WrappedAssert.java          #  TestNG’s built-in assertion capabilities by wrapping them with Log4j + extent repor
-    │
-    │── endPoints/
-    │   └── EndPoints.java              # holds all API endpoint paths as constants for easy reuse and maintainability.
-    │
-    ├── logs/
-    │   ├── ConsoleColors.java          # #provides colored console output for better readability
-    │   └── WrappedReportLogger.java    # wraps Log4j + ExtentReports to log messages with console colors and reporting integration
-    │
-    ├── pojo/
-    │   ├── request/                    # Request POJO classes
-    │   └── response/                   # Response POJO classes
-    │
-    ├── report/
-    │   └── ExtentFactory.java          # ExtentReports setup by integrating with ITestListener to generate HTML test report
-    │
-    └── reportBuilder/                  
-    │   └── ApiClient.java              # sends HTTP requests and validates responses against expected status codes and JSON schemas.
-    │   └── RequestBuilder.java         # reusable RestAssured request specifications with optional auth, body, and parameters.
-    │
-    │── utils/
-    │   └── ConfigurationManager.java   # access config.properties file
-    │   └── DataGenerator.java          # provides utility methods to generate random test data such as email, ID, password, and year.
-    │   └── EnvConfigResolver.java      # dynamically loads environment-specific configuration based on the selected environment
-    │
+View generated reports (with timestamps):
+
+cd RestAssuredVrushal/report
+
+📊 Reporting
+
+Reports generates interactive HTML reports.
+
+Log4j2 provides real-time logging on both console and reports.
+
+Example: Sample Report
+
+✅ Validations Implemented
+
+The framework validates multiple aspects of the API:
+
+Headers & Response Body
+
+Status Codes
+
+JSON Schema Validation (integrated into ApiClient)
+
+Positive & Negative Scenarios
+
+Custom Assertions through WrappedAssert
+
+🏗 Framework Design
+Core Concepts
+
+1 Test Class ↔ 1 API Request
+(e.g., GetAllBooksTest.java → Get All Books API)
+
+Request Chaining: Tokens, usernames, and passwords created in one test are reused in subsequent ones.
+
+Reusable Builders: RequestBuilder creates standard request specifications with or without authentication, query params, or body.
+
+Centralized API Client: ApiClient executes requests and performs validations (status codes + schema).
+
+POJOs handle serialization & deserialization of request/response payloads.
+
+Environment Resolver: Dynamically switches between QA, DEV, and PROD configs.
+
+Logging
+
+ConsoleColors: Improved console readability with colors.
+
+WrappedReportLogger: Unified logger for console + Reports.
+
+Data-Driven Testing
+
+Implemented using TestNG @DataProvider to execute tests with multiple input datasets.
+
+🔄 Test Strategy
+Positive Workflow
+
+Health Check
+
+Create New User
+
+Login → Get Auth Token
+
+Get All Books
+
+Add New Book
+
+Validate Book in List
+
+Fetch Book by ID
+
+Update Book
+
+Confirm Book Update
+
+Delete Book
+
+Negative Workflow
+
+Create user with already registered email
+
+Login with invalid credentials
+
+Fetch books with invalid / no token
+
+Search for non-existing book ID
+
+Delete the same book twice
+
+Validate with malformed JSON request
+
+Validate with expired or incorrect token
+
+📂 Project Structure
+src/main/java/com/bookapi/
+│
+├── assertions/
+│   └── WrappedAssert.java         # Custom assertions with TestNG + Log4j + Reports
+│
+├── endPoints/
+│   └── EndPoints.java             # Centralized API endpoint constants
+│
+├── logs/
+│   ├── ConsoleColors.java         # Adds colored output to console logs
+│   └── WrappedReportLogger.java   # Unified logger for console + Reports
+│
+├── pojo/
+│   ├── request/                   # Request body POJOs
+│   └── response/                  # Response body POJOs
+│
+├── report/
+│   └── Factory.java         # Reports setup & integration with TestNG ITestListener
+│
+├── reportBuilder/
+│   ├── ApiClient.java             # Executes requests & validates status/schema
+│   └── RequestBuilder.java        # Reusable RestAssured request specs
+│
+└── utils/
+    ├── ConfigurationManager.java  # Reads config.properties
+    ├── DataGenerator.java         # Utility to generate random test data (emails, IDs, etc.)
+    └── EnvConfigResolver.java     # Handles QA/DEV/PROD environment configs
 
 src/main/resources/
-└── schemas/                            # contains all the response schemas which are used ApiClient.java for validation
-└── log4j2.xml                          # log4j file
+├── schemas/                       # JSON Schemas for response validation
+└── log4j2.xml                     # Logging configuration
 
+src/test/java/com/bookapi/testcases/
+└── ...                            # Test classes for each API
 
-src/test/java/
-└── com/bookapi/testcases/
-    ├── assertions/                     # All the testcases are written here
-
-config.properties                       
-pom.xml                                     
+config.properties
+pom.xml
 testng.xml
 
+⚠️ Known Issues
 
-## All the tools used
+Unable to send invalid JSON payloads (422 error) via POJO serialization → workaround: manually build raw JSON string.
 
-- Maven 3.8.4+
-- Java 17+
-- Git
-- Any IDE (e.g., IntelliJ IDEA, Eclipse, VS Code)
-- RestAssured
-- TestNG
-- log4j2
-- ExtentReports
-- GitHub Actions: CI/CD pipeline for automated testing and deployment
+Login with incorrect credentials returns 400 (Bad Request) instead of 401 (Unauthorized).
+
+Fetch books with an invalid token → returns 403 (Forbidden) instead of 401 (Unauthorized).
+
+Adding a book with duplicate ID returns 500 (Internal Server Error).
+
+No User Deletion API → test data cleanup not possible.
+
+API hosted via:
+
+ssh -R 80:127.0.0.1:8000 serveo.net
 
 
+and temporary URL configured in config.properties.
+
+Current GitHub Actions pipeline runs on every push (should ideally run only on merges to dev branch).
+
+⚙️ CI/CD Integration
+
+GitHub Actions YAML pipeline is included.
+
+On push, Maven tests are triggered automatically.
+
+Reports are generated and can be published as build artifacts.
+
+Recommended improvement: run CI only on pull requests or merges to dev branch.
+
+🧰 Tools & Libraries
+
+Java 17
+
+Maven 3.8.4+
+
+RestAssured
+
+TestNG
+
+Log4j2
+
+Reports
+
+GitHub Actions
